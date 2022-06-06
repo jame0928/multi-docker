@@ -20,4 +20,4 @@ after_success:
   - docker push jjacckk/multi-client
   - docker push jjacckk/multi-nginx
   - docker push jjacckk/multi-server
-  - docker push jjacckk/multi-worker
+  - docker push jjacckk/multi-worker 
