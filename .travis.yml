@@ -4,6 +4,7 @@ services:
   - docker
 
 before_install:
+  #-t jjacckk/react-test = Alias para la imagen que se crea para facilitar su uso en comandos posteriores
   - docker build -t jjacckk/react-test -f ./client/Dockerfile.dev ./client
 
 script:
@@ -21,3 +22,15 @@ after_success:
   - docker push jjacckk/multi-nginx
   - docker push jjacckk/multi-server
   - docker push jjacckk/multi-worker 
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-886536634566'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
